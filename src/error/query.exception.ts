@@ -38,7 +38,6 @@ export class QueryFailedExceptionFilter implements ExceptionFilter {
 
     response.status(status).json({
       statusCode: status,
-      as: 'sdsds',
       message,
       timestamp: new Date().toISOString(),
     });

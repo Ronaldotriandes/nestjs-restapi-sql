@@ -1,17 +1,9 @@
-import {
-  Body,
-  Controller,
-  ForbiddenException,
-  Get,
-  Post,
-  UseFilters,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import * as Joi from 'joi';
 
 import { UsersService } from './users.service';
 import { User } from './user.entity';
-import { CREATE, JoiSchema, JoiSchemaOptions, UPDATE } from 'nestjs-joi';
-import { HttpExceptionFilter } from 'src/error/http.exception';
+import { CREATE, JoiSchema, UPDATE } from 'nestjs-joi';
 
 class UserValidation {
   @JoiSchema(Joi.string().required())
@@ -39,7 +31,7 @@ export class UsersController {
   }
 
   @Post()
-  store(@Body() user: User): Promise<User> {
+  store(@Body() user: UserValidation): Promise<User> {
     return this.service.store(user);
   }
 }
